@@ -1,0 +1,17 @@
+{
+  "name": "unfuddle_to_github",
+  "description": "Script to import unfuddle data to github.",
+  "author": "Joe Shindelar <eojthebrave@gmail.com>",
+  "dependencies": {
+    "aws-sdk": "*",
+    "flow": "~0.2.3",
+    "github": "*",
+    "optimist": "*",
+    "underscore": "*",
+    "xml2js": "0.4.x"
+  },
+  "engine": "node >= 0.10.15",
+  "devDependencies": {
+
+  }
+}

@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+var config = {};
+
+// GitHub configuration. Username will be used as the default for creating new
+// issues/comments when unable to determine an associated Unfuddle user.
+// User must have access to create issues/comments etc. with the GitHub API.
+config.gitHubUsername = '';
+config.gitHubPassword = '';
+config.gitHubRepository = '';
+
+// A map of unfuddle User ID's to GitHub user names.
+config.user_map = {
+  // Unfuddle User ID - GitHub user name.
+  '31262': 'Kyle',
+  '31239': 'Joe'
+};
+
+// AWS key for the S3 bucket where files attached to GitHub issues and
+// comments should be uploaded.
+config.aws_credentials = {
+  "accessKeyId": "",
+  "secretAccessKey": "",
+  "region": "us-east-1"
+};
+
+module.exports = config;
