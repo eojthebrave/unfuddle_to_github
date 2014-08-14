@@ -3,11 +3,11 @@
   "description": "Script to import unfuddle data to github.",
   "author": "Joe Shindelar <eojthebrave@gmail.com>",
   "dependencies": {
-    "aws-sdk": "*",
+    "aws-sdk": "2.0.0-rc4",
     "flow": "~0.2.3",
     "github": "*",
-    "optimist": "*",
-    "underscore": "*",
+    "optimist": "0.6.0",
+    "underscore": "1.5.2",
     "xml2js": "0.4.x"
   },
   "engine": "node >= 0.10.15",
