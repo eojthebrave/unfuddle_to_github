@@ -187,6 +187,27 @@ var GHImport = function() {
   }
 
   /**
+   * Close an issue to GitHub.
+   *
+   * @param issue
+   *   An object representation of a GitHub issue.
+   */
+  this.closeIssue = function(issue, cb) {
+    // Create the issue.
+    if (!argv.d) {
+      issue.state = 'closed';
+      github.issues.edit(issue, function(err, res) {
+        console.log('Closed issue: ' + issue.title);
+        cb(issue);
+      });
+    }
+    else {
+      console.log('DEBUG: Closed issue: ' + issue.title);
+      cb(issue);
+    }
+  }
+
+  /**
    * Create all the comments for a given issue and associate them with the issue.
    *
    * @param comments
@@ -253,7 +274,7 @@ var GHImport = function() {
       }
     },
     function() {
-      callback();
+      callback(issue);
     });
   }
 
@@ -373,6 +394,14 @@ var GHImport = function() {
           // with a single newline character.
           if (typeof ticket.comments === 'object' && typeof ticket.comments[0] === 'object') {
             _this.createComments(ticket.comments, issue, this);
+          }
+          else {
+            this(issue);
+          }
+        },
+        function(issue) {
+          if (ticket.status[0] === 'closed') {
+            _this.closeIssue(issue, this);
           }
           else {
             this();
