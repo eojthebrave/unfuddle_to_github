@@ -47,9 +47,11 @@ var s3 = new AWS.S3();
 
 if (!argv.d) {
   github.authenticate({
-      type: "basic",
-      username: config.gitHubUsername,
-      password: config.gitHubPassword
+      type: "oauth",
+      // username: config.gitHubUsername,
+      // password: config.gitHubPassword,
+      token: config.gitHubToken,
+
   }, function(err) {
     console.log(err);
   });
