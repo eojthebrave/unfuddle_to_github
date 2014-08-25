@@ -36,6 +36,7 @@ var argv = require('optimist')
 var BACKUP_DIR = argv.backup;
 var BACKUP_FILE = BACKUP_DIR + '/backup.xml';
 var DEFAULT_USER = config.gitHubUsername;
+var DEFAULT_ISSUE_USER = config.gitHubDefaultIssueUsername;
 var REPO = config.gitHubRepository;
 var TOTAL_TICKETS = 0;
 var TOTAL_TICKETS_COMPLETE = 0;
@@ -228,7 +229,7 @@ var GHImport = function() {
         // Comments which belong to an Unfuddle user for which we have no
         // GitHub user are just assigned to the default user for the
         // script. It's not great, but it'll work.
-        'user': (typeof _this.user_map[content['author-id'][0]] === 'string') ? _this.user_map[content['author-id'][0]] : DEFAULT_USER,
+        'user': (typeof _this.user_map[content['author-id'][0]] === 'string') ? _this.user_map[content['author-id'][0]] : DEFAULT_ISSUE_USER,
         'repo': REPO,
         'number': issue.number,
         'body': body
@@ -489,7 +490,6 @@ fs.readFile(BACKUP_FILE, function(err, data) {
         // Milestones.
         _.each(result.account.projects[0].project[0].milestones, function(element, index, list) {
           importer.createMilestones(element.milestone, cb.MULTI());
-          cb();
         });
       },
       function() {

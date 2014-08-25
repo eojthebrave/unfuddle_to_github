@@ -8,6 +8,7 @@ config.gitHubUsername = '';
 config.gitHubPassword = '';
 config.gitHubToken = '';
 config.gitHubRepository = '';
+config.gitHubDefaultIssueUsername = '';
 
 // A map of unfuddle User ID's to GitHub user names.
 config.user_map = {
