@@ -6,6 +6,7 @@ var config = {};
 // User must have access to create issues/comments etc. with the GitHub API.
 config.gitHubUsername = '';
 config.gitHubPassword = '';
+config.gitHubToken = '';
 config.gitHubRepository = '';
 
 // A map of unfuddle User ID's to GitHub user names.
