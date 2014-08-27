@@ -347,6 +347,11 @@ var GHImport = function() {
         issue.labels.push(_this.field_map[ticket['field1-value-id'][0]]);
       }
 
+      // Add a label for priority.
+      if (typeof ticket['priority'][0] == 'string') {
+        issue.labels.push('p' + ticket['priority'][0]);
+      }
+
       // If the ticket is "closed" or "fixed" or has some other content in the
       // "resolution" field we should extract that and add it at the bottom of
       // the main issue post so that it doesn't get lost.
