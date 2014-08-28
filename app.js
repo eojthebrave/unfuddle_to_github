@@ -175,11 +175,16 @@ var GHImport = function() {
     // Create the issue.
     if (!argv.d) {
       github.issues.create(issue, function(err, res) {
-        issue.number = res.number;
-        // @todo, log that the issue was created?
-
         TOTAL_TICKETS_COMPLETE++;
-        console.log('(' + TOTAL_TICKETS_COMPLETE + '/' + TOTAL_TICKETS + ') Saved issue: ' + issue.title);
+        if (err) {
+          issue.error = true;
+          console.log('ERROR: ' + err);
+        }
+        else {
+          issue.number = res.number;
+          console.log('(' + TOTAL_TICKETS_COMPLETE + '/' + TOTAL_TICKETS + ') Saved issue: ' + issue.title);
+        }
+
         cb(issue);
       });
     }
@@ -400,7 +405,7 @@ var GHImport = function() {
           // The typeof ticket.comments[0] check is required here
           // because sometimes the comments contain nothing but an empty string
           // with a single newline character.
-          if (typeof ticket.comments === 'object' && typeof ticket.comments[0] === 'object') {
+          if (typeof ticket.comments === 'object' && typeof ticket.comments[0] === 'object' && typeof issue.error === 'undefined') {
             _this.createComments(ticket.comments, issue, this);
           }
           else {
@@ -408,7 +413,7 @@ var GHImport = function() {
           }
         },
         function(issue) {
-          if (ticket.status[0] === 'closed') {
+          if (ticket.status[0] === 'closed' && typeof issue.error === 'undefined') {
             _this.closeIssue(issue, this);
           }
           else {
